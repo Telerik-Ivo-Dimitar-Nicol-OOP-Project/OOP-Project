@@ -11,6 +11,12 @@ public class ValidationHelpers {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+    public static void validateWeightIsCorrect(double value, double min, double max, String errorMessage) {
+        // Needs to check if value > min and if value < max
+        if (value < min || value > max ){
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 
     public static void validateStringLength(String stringToValidate, int minLength, int maxLength, String errorMessage) {
         validateValueInRange(stringToValidate.length(), minLength, maxLength, errorMessage);
