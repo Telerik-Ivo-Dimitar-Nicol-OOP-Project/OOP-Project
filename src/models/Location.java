@@ -6,19 +6,19 @@ public enum Location {
     public String toString() {
         switch (this) {
             case SYD:
-                return "SYD";
+                return "Sydney";
             case MEL:
-                return "MEL";
+                return "Melbourne";
             case ADL:
-                return "ADL";
+                return "ADELAIDE";
             case ASP:
-                return "ASP";
+                return "Alice Springs";
             case BRI:
-                return "BRI";
+                return "Brisbane";
             case DAR:
-                return "DAR";
+                return "Darwin";
             case PER:
-                return "PER";
+                return "Perth";
 
             default:
                 throw new IllegalArgumentException();
