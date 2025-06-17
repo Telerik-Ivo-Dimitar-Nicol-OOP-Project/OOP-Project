@@ -38,6 +38,22 @@ public abstract class Vehicle implements models.contracts.Vehicle {
     public int getId() {
         return id;
     }
+    @Override
+    public VehicleName getName() {
+        return this.name;
+    }
+
+    @Override
+    public int getCapacity() {
+        return this.capacity;
+    }
+
+    @Override
+    public int getRange() {
+        return this.range;
+    }
+
+
 
 
 }
