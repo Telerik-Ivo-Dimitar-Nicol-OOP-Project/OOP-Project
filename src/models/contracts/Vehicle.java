@@ -1,7 +1,9 @@
 package models.contracts;
 
+import models.VehicleName;
+
 public interface Vehicle extends Identifiable{
-    String getName();
+    VehicleName getName();
     int getCapacity();
     int getRange();
 
