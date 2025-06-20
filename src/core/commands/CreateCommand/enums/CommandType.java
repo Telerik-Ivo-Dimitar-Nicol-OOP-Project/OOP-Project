@@ -1,6 +1,6 @@
 package core.commands.CreateCommand.enums;
 //TODO add more commands
-public enum CommandEnums {
+public enum CommandType {
     CREATEROUTE,
     CREATEPACKAGE,
     LISTROUTES,

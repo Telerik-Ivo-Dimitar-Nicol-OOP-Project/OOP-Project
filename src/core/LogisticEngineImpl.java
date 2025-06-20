@@ -1,6 +1,9 @@
 package core;
 
+import core.contracts.Command;
+import core.contracts.CommandFactory;
 import core.contracts.Engine;
+import core.contracts.LogisticRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +17,12 @@ public class LogisticEngineImpl implements Engine {
 
 // pending implementation of CommandFactory & Agency Repository
     private final CommandFactory commandFactory;
-    private final AgencyRepository agencyRepository;
+    private final LogisticRepository logisticRepository;
+
 
     public LogisticEngineImpl() {
         this.commandFactory = new CommandFactoryImpl();
-        this.agencyRepository = new AgencyRepositoryImpl();
+        this.logisticRepository = new LogisticRepositoryImpl();
     }
     public void start() {
         Scanner scanner = new Scanner(System.in);
@@ -45,7 +49,7 @@ public class LogisticEngineImpl implements Engine {
 
     private void processCommand(String inputLine) {
         String commandName = extractCommandName(inputLine);
-        Command command = commandFactory.createCommandFromCommandName(commandName, agencyRepository);
+        Command command = commandFactory.createCommandFromCommandName(commandName, logisticRepository);
         List<String> parameters = extractCommandParameters(inputLine);
         String executionResult = command.execute(parameters);
         System.out.println(executionResult);

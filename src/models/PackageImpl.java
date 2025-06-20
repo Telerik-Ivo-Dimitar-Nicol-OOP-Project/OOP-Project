@@ -65,4 +65,9 @@ public class PackageImpl implements Package {
     public int getId() {
         return id;
     }
+    @Override
+    public String toString(){
+        return String.format("Package with id: %d%n Weight: %.2f%n Start & End Location: %s - %s%n contact information: " +
+                "%s%n", getId(), getWeight(), getStartLocation(), getEndLocation(), getContactInformation());
+    }
 }

@@ -2,7 +2,7 @@ package models.contracts;
 
 import models.Location;
 
-public interface Package extends Identifiable {
+public interface Package extends Identifiable, Printable {
     Location getStartLocation();
     Location getEndLocation();
     double getWeight();

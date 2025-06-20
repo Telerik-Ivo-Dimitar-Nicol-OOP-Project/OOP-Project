@@ -1,4 +1,4 @@
-package core.commands;
+package core.contracts;
 
 import java.util.List;
 
