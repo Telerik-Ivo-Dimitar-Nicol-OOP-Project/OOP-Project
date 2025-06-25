@@ -28,7 +28,6 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return id;
     }
 
-    @Override
     public void addCheckpoint(Location location, LocalDateTime time, boolean isAvailable) {
         checkpoints.add(new RouteCheckpoint(location, time, isAvailable));
     }
@@ -51,7 +50,7 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     }
 
     @Override
-    public int totalStops() {
+    public int getTotalStops() {
         return checkpoints.size();
     }
 

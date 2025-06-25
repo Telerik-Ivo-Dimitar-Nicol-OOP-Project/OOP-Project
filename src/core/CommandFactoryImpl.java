@@ -1,5 +1,6 @@
 package core;
 
+import core.commands.creation.CreateRouteCommand;
 import core.contracts.Command;
 import core.commands.CreateCommand.enums.CommandType;
 import core.commands.CreateCommand.listing.ListPackagesCommand;
@@ -19,6 +20,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new CreatePackageCommand(logisticRepository);
             case LISTPACKAGES:
                 return new ListPackagesCommand(logisticRepository);
+            case CREATEROUTE:
+                return new CreateRouteCommand(logisticRepository);
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));
