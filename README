@@ -11,3 +11,11 @@ Createpackage syd mel 23.4 Ivo Popov +12312412425
 To list all packages use the listpackages command
 example
 listpackages
+
+Create route command:
+createroute SYD MEL
+
+// todo
+findroute (packageID)
+
+assignroute(packageid, routeid) // needs to check if routeID is a valid route for the package

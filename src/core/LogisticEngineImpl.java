@@ -4,6 +4,7 @@ import core.contracts.Command;
 import core.contracts.CommandFactory;
 import core.contracts.Engine;
 import core.contracts.LogisticRepository;
+import exceptions.InvalidUserInputException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class LogisticEngineImpl implements Engine {
                     break;
                 }
                 processCommand(inputLine);
-            } catch (Exception ex) {
+            } catch (InvalidUserInputException | IllegalArgumentException ex) {
                 if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
                     System.out.println(ex.getMessage());
                 } else {
