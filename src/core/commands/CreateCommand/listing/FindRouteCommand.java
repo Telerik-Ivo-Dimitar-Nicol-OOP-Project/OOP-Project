@@ -17,14 +17,13 @@ import java.util.List;
 
 public class FindRouteCommand implements Command {
     public static final String THERE_ARE_NO_ROUTES_CREATED_YET_ERROR = "There are no routes created yet";
-    private final List<DeliveryRouteImpl> routes;
     private final LogisticRepository repository;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String INPUT_NOT_INT_ERROR = "Package Id to search routes for needs to be a whole number.";
 
     public FindRouteCommand(LogisticRepository logisticRepository){
         this.repository = logisticRepository;
-        routes = logisticRepository.getRoutes();
+
     }
 
     @Override
@@ -36,32 +35,15 @@ public class FindRouteCommand implements Command {
         return ListingHelpers.routesToString(suitableRoutesForPackage);
     }
     private List<DeliveryRoute> getSuitableRoutesForPackage(Package packageToCheckRoutesFor) {
+        List<DeliveryRouteImpl> routes = repository.getRoutes();
         if (routes.isEmpty()){
             throw new InvalidUserInputException(THERE_ARE_NO_ROUTES_CREATED_YET_ERROR);
         }
         List<DeliveryRoute> suitableRoutesForPackage = new ArrayList<>();
-        Location startLocation = packageToCheckRoutesFor.getStartLocation();
-        Location endLocation = packageToCheckRoutesFor.getEndLocation();
-        for (DeliveryRoute route : routes){
-            boolean hasSuitableStartLocation = false;
-            boolean hasSuitableEndLocation = false;
-            List<String> routeLocations = route.getLocations();
-            int indexOfStarLocation = 0;
-            for (int i = 0; i < routeLocations.size(); i++) {
-                if (routeLocations.get(i).equals(startLocation.toString())){
-                    hasSuitableStartLocation = true;
-                    indexOfStarLocation = i;
-                    break;
-                }
-            }
 
-            for (int i = indexOfStarLocation + 1; i < routeLocations.size(); i++) {
-                if (routeLocations.get(i).equals(endLocation.toString())){
-                    hasSuitableEndLocation = true;
-                    break;
-                }
-            }
-            if (hasSuitableStartLocation && hasSuitableEndLocation){
+        for (DeliveryRoute route : routes){
+            // this validation helper can be reused to check if route is valid for a given package
+            if (ValidationHelpers.validateSuitableRoute(packageToCheckRoutesFor, route)){
                 suitableRoutesForPackage.add(route);
             }
         }
