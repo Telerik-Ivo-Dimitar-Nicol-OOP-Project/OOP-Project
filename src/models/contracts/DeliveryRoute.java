@@ -3,7 +3,7 @@ package models.contracts;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface DeliveryRoute {
+public interface DeliveryRoute extends Printable {
 
     public String getRouteID();
     public List<String> getLocations();

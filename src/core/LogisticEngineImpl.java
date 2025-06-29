@@ -15,8 +15,6 @@ public class LogisticEngineImpl implements Engine {
     private static final String TERMINATION_COMMAND = "Exit";
     private static final String EMPTY_COMMAND_ERROR = "Command cannot be empty.";
 
-
-// pending implementation of CommandFactory & Agency Repository
     private final CommandFactory commandFactory;
     private final LogisticRepository logisticRepository;
 

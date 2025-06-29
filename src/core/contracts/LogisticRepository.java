@@ -12,6 +12,7 @@ import java.util.List;
 public interface LogisticRepository {
     Package createPackage(Location startLocation, Location endLocation, double weight, String contact);
     List<PackageImpl> getPackages();
+    Package getPackageById(int id);
 
     DeliveryRoute createRoute(Location startLocation, Location endLocation, LocalDateTime departureTime);
     List<DeliveryRouteImpl> getRoutes();

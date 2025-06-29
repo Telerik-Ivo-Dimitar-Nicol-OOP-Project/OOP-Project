@@ -14,9 +14,12 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private final String id;
     private  final List<RouteCheckpoint> checkpoints;
 
-    public DeliveryRouteImpl(){
+    public DeliveryRouteImpl(Location startLocation, Location endLocation, LocalDateTime departureTime){
         this.id = generateUniqueRouteID();
         this.checkpoints = new ArrayList<>();
+        addCheckpoint(startLocation, departureTime, true);
+        //TODO will add local date time.now for testing, needs to be changed later
+        addCheckpoint(endLocation, LocalDateTime.now(), true);
     }
 
     private String generateUniqueRouteID(){
@@ -65,5 +68,10 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
         return DistanceCalculator.calculateDistance(locations);
 
+    }
+    @Override
+    public String toString(){
+        return String.format("Route with id: %s%n And stops in %s " +
+                "%n", getRouteID(), getLocations().toString());
     }
 }

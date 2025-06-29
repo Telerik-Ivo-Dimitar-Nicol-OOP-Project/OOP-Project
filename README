@@ -15,7 +15,8 @@ listpackages
 Create route command:
 createroute SYD MEL
 
-// todo
-findroute (packageID)
+Find suitable route command - takes in a package id and prints routes that contain its start & end location
+Example:
+findroute 1
 
 assignroute(packageid, routeid) // needs to check if routeID is a valid route for the package

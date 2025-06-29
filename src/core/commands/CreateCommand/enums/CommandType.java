@@ -5,5 +5,6 @@ public enum CommandType {
     CREATEPACKAGE,
     LISTROUTES,
     LISTPACKAGES,
-    LISTTRUCKS
+    LISTTRUCKS,
+    FINDROUTE,
 }
