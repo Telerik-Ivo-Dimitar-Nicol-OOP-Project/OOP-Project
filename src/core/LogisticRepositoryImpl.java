@@ -7,6 +7,7 @@ import models.PackageImpl;
 import models.Routes.DeliveryRouteImpl;
 import models.contracts.DeliveryRoute;
 import models.contracts.Package;
+import models.contracts.Vehicle;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,10 +20,24 @@ public class LogisticRepositoryImpl implements LogisticRepository {
 
     private final List<PackageImpl> packages = new ArrayList<>();
     private final List<DeliveryRouteImpl> routes = new ArrayList<>();
+    private final List<models.contracts.Vehicle> vehicles = new ArrayList<>();
 
     public LogisticRepositoryImpl(){
         nextPackageId = 0;
+        initializeVehicles();
 
+    }
+
+    private void initializeVehicles() {
+        for (int i = 1001; i <= 1010; i++) {
+            vehicles.add(new models.vehicles.Scania(i));
+        }
+        for (int i = 1011; i <= 1025; i++) {
+            vehicles.add(new models.vehicles.Man(i));
+        }
+        for (int i = 1026; i <= 1040; i++) {
+            vehicles.add(new models.vehicles.Actros(i));
+        }
     }
 
     @Override
@@ -59,5 +74,10 @@ public class LogisticRepositoryImpl implements LogisticRepository {
     @Override
     public List<DeliveryRouteImpl> getRoutes() {
         return new ArrayList<>(routes);
+    }
+
+    @Override
+    public List<Vehicle> getAllVehicles() {
+        return new ArrayList<>(vehicles);
     }
 }

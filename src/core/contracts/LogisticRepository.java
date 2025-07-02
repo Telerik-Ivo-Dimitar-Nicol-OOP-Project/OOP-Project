@@ -5,6 +5,7 @@ import models.PackageImpl;
 import models.Routes.DeliveryRouteImpl;
 import models.contracts.DeliveryRoute;
 import models.contracts.Package;
+import models.contracts.Vehicle;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,4 +17,5 @@ public interface LogisticRepository {
 
     DeliveryRoute createRoute(Location startLocation, Location endLocation, LocalDateTime departureTime);
     List<DeliveryRouteImpl> getRoutes();
+    List<Vehicle> getAllVehicles();
 }

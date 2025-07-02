@@ -5,7 +5,7 @@ import models.VehicleName;
 public class Scania extends Vehicle implements models.contracts.Vehicle {
 
     public Scania(int id){
-        super(id, VehicleName.Scania);
+        super(id, VehicleName.SCANIA);
 
     }
 

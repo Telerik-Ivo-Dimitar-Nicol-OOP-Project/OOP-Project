@@ -4,7 +4,7 @@ import models.VehicleName;
 
 public class Actros extends Vehicle{
     public Actros(int id){
-        super(id, VehicleName.Actros);
+        super(id, VehicleName.ACTROS);
     }
 
     @Override
