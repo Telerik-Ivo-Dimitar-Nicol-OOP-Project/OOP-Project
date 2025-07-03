@@ -37,7 +37,7 @@ public class ValidationHelpers {
         Location endLocation = packageToCheckRoutesFor.getEndLocation();
         boolean hasSuitableStartLocation = false;
         boolean hasSuitableEndLocation = false;
-        List<String> routeLocations = route.getLocations();
+        List<Location> routeLocations = route.getLocations();
         int indexOfStarLocation = 0;
         for (int i = 0; i < routeLocations.size(); i++) {
             if (routeLocations.get(i).equals(startLocation.toString())){
