@@ -9,17 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import static utils.ValidationHelpers.isValidLocation;
+
 public class DeliveryRouteImpl implements DeliveryRoute {
 
     private final String id;
-    private  final List<RouteCheckpoint> checkpoints;
+    private  final List<Location> checkpoints;
+    private final LocalDateTime departureTime;
+    private final LocalDateTime arrivalTime;
 
-    public DeliveryRouteImpl(Location startLocation, Location endLocation, LocalDateTime departureTime){
+    public DeliveryRouteImpl(Location startLocation, Location endLocation){
         this.id = generateUniqueRouteID();
         this.checkpoints = new ArrayList<>();
-        addCheckpoint(startLocation, departureTime, true);
-        //TODO will add local date time.now for testing, needs to be changed later
-        addCheckpoint(endLocation, LocalDateTime.now(), true);
+        addCheckpoint(startLocation);
+        addCheckpoint(endLocation);
+        this.departureTime = LocalDateTime.now().plusDays(2);//TODO placeholder departure time. Could be made with some actual logic.
+        this.arrivalTime = departureTime.plusDays(2);
     }
 
     private String generateUniqueRouteID(){
@@ -31,25 +36,50 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return id;
     }
 
-    public void addCheckpoint(Location location, LocalDateTime time, boolean isAvailable) {
-        checkpoints.add(new RouteCheckpoint(location, time, isAvailable));
+public void addCheckpoint(Location checkpoint) {
+        if (!isValidLocation(String.valueOf(checkpoint))) {
+            throw new IllegalArgumentException("Invalid location: " + checkpoint);
+        }
+
+        if (checkpoints.contains(checkpoint)) {
+            return;
+        }
+
+        Location start = checkpoints.get(0);
+        Location end = checkpoints.get(checkpoints.size() - 1);
+
+        int bestDistance = Integer.MAX_VALUE;
+        int bestInsertIndex = 1;
+
+        for (int i = 1; i < checkpoints.size(); i++) {
+            List<Location> tempRoute = new ArrayList<>(checkpoints);
+            tempRoute.add(i, checkpoint);
+
+            int distance = DistanceCalculator.calculateDistance(tempRoute.toArray(new Location[0]));
+
+            if (distance < bestDistance) {
+                bestDistance = distance;
+                bestInsertIndex = i;
+            }
+        }
+
+        checkpoints.add(bestInsertIndex, checkpoint);
     }
 
     @Override
-    public List<String> getLocations() {
-        return checkpoints.stream()
-                .map(cp ->cp.location().toString())
-                .toList();
+    public List<Location> getLocations() {
+        return checkpoints.stream().toList();
+
     }
 
     @Override
     public LocalDateTime getDepartureTime() {
-        return checkpoints.isEmpty() ? null : checkpoints.get(0).timestamp();
+        return departureTime;
     }
-        //TODO need to add logic for arrival time to be assigned to the package
+
     @Override
     public LocalDateTime getArrivalTime() {
-        return checkpoints.isEmpty() ? null : checkpoints.get(0).timestamp();
+        return departureTime;
     }
 
     @Override
@@ -58,17 +88,14 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     }
 
     @Override
-    public int getTotalDistance(){
-        if (checkpoints.size() <2) return 0;
+    public int getTotalDistance() {
+        if (checkpoints.size() < 2) return 0;
 
-        Location[] locations;
-        locations = checkpoints.stream()
-                .map(RouteCheckpoint::location)
-                .toArray(Location[]::new);
+        Location[] locations = checkpoints.toArray(new Location[0]);
 
         return DistanceCalculator.calculateDistance(locations);
-
     }
+
     @Override
     public String toString(){
         return String.format("Route with id: %s%n And stops in %s " +

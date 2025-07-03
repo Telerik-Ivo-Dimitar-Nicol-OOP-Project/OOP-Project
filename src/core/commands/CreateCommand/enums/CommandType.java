@@ -7,4 +7,6 @@ public enum CommandType {
     LISTPACKAGES,
     LISTTRUCKS,
     FINDROUTE,
+    ASSIGNROUTE,
+    ADDCHECKPOINT,
 }

@@ -15,7 +15,8 @@ public interface LogisticRepository {
     List<PackageImpl> getPackages();
     Package getPackageById(int id);
 
-    DeliveryRoute createRoute(Location startLocation, Location endLocation, LocalDateTime departureTime);
+    DeliveryRoute createRoute(Location startLocation, Location endLocation);
     List<DeliveryRouteImpl> getRoutes();
     List<Vehicle> getAllVehicles();
+    DeliveryRoute getRouteById(int id);
 }

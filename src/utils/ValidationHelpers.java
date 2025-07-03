@@ -59,4 +59,13 @@ public class ValidationHelpers {
         return false;
 
     }
+
+    public static boolean isValidLocation(String input){
+        try{
+            Location.valueOf(input.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException e){
+            return false;
+        }
+    }
 }

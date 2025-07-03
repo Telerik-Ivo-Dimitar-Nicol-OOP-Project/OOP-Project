@@ -6,9 +6,9 @@ import core.contracts.Command;
 import core.contracts.LogisticRepository;
 import exceptions.InvalidUserInputException;
 import models.Location;
+import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -9,7 +9,6 @@ import models.contracts.DeliveryRoute;
 import models.contracts.Package;
 import models.contracts.Vehicle;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,8 +64,8 @@ public class LogisticRepositoryImpl implements LogisticRepository {
 
     // to do
     @Override
-    public DeliveryRoute createRoute(Location startLocation, Location endLocation, LocalDateTime departureTime) {
-        DeliveryRouteImpl route = new DeliveryRouteImpl(startLocation, endLocation, departureTime);
+    public DeliveryRoute createRoute(Location startLocation, Location endLocation) {
+        DeliveryRouteImpl route = new DeliveryRouteImpl(startLocation, endLocation);
         this.routes.add(route);
         return route;
     }
@@ -74,6 +73,14 @@ public class LogisticRepositoryImpl implements LogisticRepository {
     @Override
     public List<DeliveryRouteImpl> getRoutes() {
         return new ArrayList<>(routes);
+    }
+    //TO DO
+    @Override
+    public DeliveryRouteImpl getRouteById(int id){
+        return routes.stream()
+                .filter(r -> r.getRouteID().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new InvalidUserInputException("No route with ID: " +id));
     }
 
     @Override
