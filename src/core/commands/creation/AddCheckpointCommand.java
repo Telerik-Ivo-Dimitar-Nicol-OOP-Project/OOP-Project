@@ -1,6 +1,5 @@
 package core.commands.creation;
 
-import core.LogisticRepositoryImpl;
 import core.contracts.Command;
 import core.contracts.LogisticRepository;
 import exceptions.InvalidUserInputException;
