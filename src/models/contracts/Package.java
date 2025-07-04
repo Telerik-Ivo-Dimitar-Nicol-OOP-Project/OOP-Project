@@ -7,4 +7,6 @@ public interface Package extends Identifiable, Printable {
     Location getEndLocation();
     double getWeight();
     String getContactInformation();
+    boolean isAssignedToRoute();
+    void setAssignedToRoute(boolean assignedToRoute);
 }

@@ -40,7 +40,7 @@ public class ValidationHelpers {
         List<Location> routeLocations = route.getLocations();
         int indexOfStarLocation = 0;
         for (int i = 0; i < routeLocations.size(); i++) {
-            if (routeLocations.get(i).equals(startLocation.toString())){
+            if (routeLocations.get(i).equals(startLocation)){
                 hasSuitableStartLocation = true;
                 indexOfStarLocation = i;
                 break;
@@ -48,7 +48,7 @@ public class ValidationHelpers {
         }
 
         for (int i = indexOfStarLocation + 1; i < routeLocations.size(); i++) {
-            if (routeLocations.get(i).equals(endLocation.toString())){
+            if (routeLocations.get(i).equals(endLocation)){
                 hasSuitableEndLocation = true;
                 break;
             }

@@ -19,4 +19,6 @@ Find suitable route command - takes in a package id and prints routes that conta
 Example:
 findroute 1
 
-assignroute(packageid, routeid) // needs to check if routeID is a valid route for the package
+Assign route command assigns an package to route, it first takes package id and then route id
+Example:
+assignroute packageid routeid

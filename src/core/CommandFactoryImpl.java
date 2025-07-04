@@ -2,6 +2,7 @@ package core;
 
 import core.commands.CreateCommand.listing.FindRouteCommand;
 import core.commands.creation.AddCheckpointCommand;
+import core.commands.creation.AssignRouteCommand;
 import core.commands.creation.CreateRouteCommand;
 import core.contracts.Command;
 import core.commands.CreateCommand.enums.CommandType;
@@ -28,6 +29,9 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new FindRouteCommand(logisticRepository);
             case ADDCHECKPOINT:
                 return new AddCheckpointCommand(logisticRepository);
+            case ASSIGNROUTE:
+                return new AssignRouteCommand(logisticRepository);
+
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));

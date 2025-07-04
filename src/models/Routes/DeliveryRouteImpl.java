@@ -2,6 +2,7 @@ package models.Routes;
 
 import models.Location;
 import models.contracts.DeliveryRoute;
+import models.contracts.Package;
 import utils.DistanceCalculator;
 
 import java.time.LocalDateTime;
@@ -17,6 +18,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private  final List<Location> checkpoints;
     private final LocalDateTime departureTime;
     private final LocalDateTime arrivalTime;
+    private final List<Package> assignedPackages;
+    private double weightOfAssignedPackages;
 
     public DeliveryRouteImpl(Location startLocation, Location endLocation){
         this.id = generateUniqueRouteID();
@@ -25,6 +28,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         addCheckpoint(endLocation);
         this.departureTime = LocalDateTime.now().plusDays(2);//TODO placeholder departure time. Could be made with some actual logic.
         this.arrivalTime = departureTime.plusDays(2);
+        assignedPackages = new ArrayList<>();
+        weightOfAssignedPackages = 0;
     }
 
     private String generateUniqueRouteID(){
@@ -94,6 +99,26 @@ public void addCheckpoint(Location checkpoint) {
         Location[] locations = checkpoints.toArray(new Location[0]);
 
         return DistanceCalculator.calculateDistance(locations);
+    }
+
+    @Override
+    public void addPackageToRoute(Package packageToAdd) {
+        weightOfAssignedPackages += packageToAdd.getWeight();
+        assignedPackages.add(packageToAdd);
+
+    }
+
+    @Override
+    public void removePackageFromRoute(int packageID) {
+        for (int i = 0; i < assignedPackages.size(); i++) {
+            if (assignedPackages.get(i).getId() == packageID){
+                weightOfAssignedPackages -= assignedPackages.get(i).getWeight();
+                assignedPackages.remove(i);
+                return;
+            }
+
+        }
+        throw new IllegalArgumentException(String.format("No package with id: %d is assigned to route %s", packageID, getRouteID()));
     }
 
     @Override

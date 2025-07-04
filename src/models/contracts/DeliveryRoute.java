@@ -13,5 +13,7 @@ public interface DeliveryRoute extends Printable {
     LocalDateTime getArrivalTime();
     int getTotalStops();
     public int getTotalDistance();
+    void addPackageToRoute(Package packageToAdd);
+    void removePackageFromRoute(int packageID);
 
 }

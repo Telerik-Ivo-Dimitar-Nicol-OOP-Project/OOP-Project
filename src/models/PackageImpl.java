@@ -19,6 +19,7 @@ public class PackageImpl implements Package {
     private Location endLocation;
     private double weight;
     private String contact;
+    private boolean assignedToRoute;
 
 
 
@@ -28,9 +29,18 @@ public class PackageImpl implements Package {
         this.endLocation = endLocation;
         setWeight(weight);
         setContact(contact);
+        assignedToRoute = false;
 
 
     }
+    public boolean isAssignedToRoute() {
+        return assignedToRoute;
+    }
+
+    public void setAssignedToRoute(boolean assignedToRoute) {
+        this.assignedToRoute = assignedToRoute;
+    }
+
     private void setWeight(double weight){
         ValidationHelpers.validateWeightIsCorrect(weight, PACKAGE_MIN_WEIGHT, PACKAGE_MAX_WEIGHT,PACKAGE_OUTSIDE_OF_LIMIT);
         this.weight = weight;
