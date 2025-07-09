@@ -38,6 +38,5 @@ public class AssignRouteCommand implements Command {
         deliveryRouteToAddTo.addPackageToRoute(packageToAdd);
         return String.format(ASSIGNED_TO_ROUTE, idOfPackage, idOfRoute);
 
-
     }
 }
