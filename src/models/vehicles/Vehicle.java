@@ -7,20 +7,22 @@ public abstract class Vehicle implements models.contracts.Vehicle {
     protected int range;
     protected int capacity;
     protected final VehicleName name;
+    protected boolean isFree = true;
 
     public Vehicle(int id, VehicleName vehicleName){
         this.id = id;
         this.name = vehicleName;
         this.capacity = setCapacity();
         this.range = setRange();
-
-
     }
 
     protected abstract int setRange();
 
     protected abstract int setCapacity();
 
+    public void setFree(boolean free) {
+        this.isFree = free;
+    }
 
     @Override
     public int getId() {
@@ -41,7 +43,9 @@ public abstract class Vehicle implements models.contracts.Vehicle {
         return this.range;
     }
 
-
-
+    @Override
+    public boolean isFree() {
+        return this.isFree;
+    }
 
 }

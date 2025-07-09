@@ -1,6 +1,8 @@
 package core;
 
 import core.commands.CreateCommand.listing.FindRouteCommand;
+import core.commands.CreateCommand.listing.ListFreeVehiclesCommand;
+import core.commands.CreateCommand.listing.ListTrucksCommand;
 import core.commands.creation.AddCheckpointCommand;
 import core.commands.creation.AssignRouteCommand;
 import core.commands.creation.CreateRouteCommand;
@@ -31,6 +33,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AddCheckpointCommand(logisticRepository);
             case ASSIGNROUTE:
                 return new AssignRouteCommand(logisticRepository);
+            case LISTTRUCKS:
+                return new ListTrucksCommand(logisticRepository);
+            case LISTFREEVEHICLES:
+                return new ListFreeVehiclesCommand(logisticRepository);
 
 
             default:

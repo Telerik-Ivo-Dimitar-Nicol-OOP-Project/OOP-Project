@@ -6,5 +6,7 @@ public interface Vehicle extends Identifiable{
     VehicleName getName();
     int getCapacity();
     int getRange();
+    boolean isFree();
+
 
 }
