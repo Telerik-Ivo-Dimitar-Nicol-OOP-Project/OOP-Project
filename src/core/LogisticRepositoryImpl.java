@@ -78,7 +78,7 @@ public class LogisticRepositoryImpl implements LogisticRepository {
     @Override
     public DeliveryRouteImpl getRouteById(int id){
         return routes.stream()
-                .filter(r -> r.getRouteID().equals(id))
+                .filter(r -> r.getRouteID()==(id))
                 .findFirst()
                 .orElseThrow(() -> new InvalidUserInputException("No route with ID: " +id));
     }

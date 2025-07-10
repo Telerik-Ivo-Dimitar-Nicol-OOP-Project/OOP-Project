@@ -9,20 +9,23 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static utils.ValidationHelpers.isValidLocation;
 
 public class DeliveryRouteImpl implements DeliveryRoute {
 
-    private final String id;
+    private final int id;
     private  final List<Location> checkpoints;
     private final LocalDateTime departureTime;
     private final LocalDateTime arrivalTime;
     private final List<Package> assignedPackages;
     private double weightOfAssignedPackages;
+    private static final AtomicInteger idCounter = new AtomicInteger(1);
+
 
     public DeliveryRouteImpl(Location startLocation, Location endLocation){
-        this.id = generateUniqueRouteID();
+        this.id = idCounter.getAndIncrement();
         this.checkpoints = new ArrayList<>();
         addCheckpoint(startLocation);
         addCheckpoint(endLocation);
@@ -32,12 +35,9 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         weightOfAssignedPackages = 0;
     }
 
-    private String generateUniqueRouteID(){
-        return UUID.randomUUID().toString().substring(0, 8);
-    }
 
     @Override
-    public String getRouteID() {
+    public int getRouteID() {
         return id;
     }
 
