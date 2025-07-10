@@ -2,7 +2,6 @@ package core.commands.CreateCommand.listing;
 
 import core.contracts.Command;
 import exceptions.InvalidUserInputException;
-import models.Routes.DeliveryRouteImpl;
 import models.contracts.DeliveryRoute;
 import utils.ListingHelpers;
 
@@ -24,6 +23,5 @@ public class ListRoutesCommand implements Command {
         }
 
         return ListingHelpers.routesToString(routes);
-
     }
 }

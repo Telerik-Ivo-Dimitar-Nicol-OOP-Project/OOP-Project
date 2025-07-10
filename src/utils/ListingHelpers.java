@@ -17,7 +17,7 @@ public class ListingHelpers {
         }
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();
     }
-    public static String routesToString(List<DeliveryRouteImpl> routes){
+    public static String routesToString(List<? extends DeliveryRoute> routes) {
         List<String> result = new ArrayList<>();
         for (DeliveryRoute route : routes){
             result.add(route.toString());
