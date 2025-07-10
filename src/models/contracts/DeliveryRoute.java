@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DeliveryRoute extends Printable {
 
-    public String getRouteID();
+    public int getRouteID();
     public List<Location> getLocations();
     LocalDateTime getDepartureTime();
     LocalDateTime getArrivalTime();
