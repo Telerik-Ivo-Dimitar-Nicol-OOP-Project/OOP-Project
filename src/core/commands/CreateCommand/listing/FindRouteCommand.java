@@ -17,6 +17,7 @@ import java.util.List;
 
 public class FindRouteCommand implements Command {
     public static final String THERE_ARE_NO_ROUTES_CREATED_YET_ERROR = "There are no routes created yet";
+    public static final String ALREADY_DELIVERED = "Package is already delivered";
     private final LogisticRepository repository;
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 1;
     public static final String INPUT_NOT_INT_ERROR = "Package Id to search routes for needs to be a whole number.";
@@ -31,6 +32,12 @@ public class FindRouteCommand implements Command {
         ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         int packageIdToFindRoutes = ParsingHelpers.tryParseInteger(parameters.get(0), INPUT_NOT_INT_ERROR);
         Package packageToCheckRoutesFor = repository.getPackageById(packageIdToFindRoutes);
+        if (packageToCheckRoutesFor.isDelivered()){
+            throw new IllegalArgumentException(ALREADY_DELIVERED);
+        }
+        if (packageToCheckRoutesFor.isAssignedToRoute()){
+            throw new IllegalArgumentException(String.format("Package %d is already assigned to route %s", packageToCheckRoutesFor.getId(), packageToCheckRoutesFor.getRouteIdToWhichPackageIsAssigned()));
+        }
         List<DeliveryRoute> suitableRoutesForPackage = getSuitableRoutesForPackage(packageToCheckRoutesFor);
         return ListingHelpers.routesToString(suitableRoutesForPackage);
     }

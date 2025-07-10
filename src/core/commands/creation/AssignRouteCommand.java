@@ -14,8 +14,9 @@ public class AssignRouteCommand implements Command {
     public static final String ID_OF_PACKAGE_NEEDS_TO_BE_INTEGER_NUMBER = "ID Of package needs to be a n Integer number";
     public static final String ID_OF_ROUTE_NEEDS_TO_BE_INTEGER_NUMBER = "ID Of Route needs to be a n Integer number";
     public static final String ROUTE_NOT_SUITABLE_FOR_PACKAGE_ERROR = "Route with id : %d is not suitable for package with id: %d";
-    public static final String ASSIGNED_TO_ROUTE_ERROR = "Package is already assigned to route";
+    public static final String ASSIGNED_TO_ROUTE_ERROR = "Package is already assigned to route %s";
     public static final String ASSIGNED_TO_ROUTE = "Package: %d assigned to route %d";
+    public static final String PACKAGE_IS_ALREADY_DELIVERED = "This package is already delivered";
     private final LogisticRepository repository;
 
     public AssignRouteCommand(LogisticRepository repository){
@@ -33,7 +34,10 @@ public class AssignRouteCommand implements Command {
             throw new InvalidUserInputException(String.format(ROUTE_NOT_SUITABLE_FOR_PACKAGE_ERROR, idOfRoute, idOfPackage));
         }
         if (packageToAdd.isAssignedToRoute()){
-            throw new InvalidUserInputException(ASSIGNED_TO_ROUTE_ERROR);
+            throw new InvalidUserInputException(String.format(ASSIGNED_TO_ROUTE_ERROR, packageToAdd.getRouteIdToWhichPackageIsAssigned()));
+        }
+        if (packageToAdd.isDelivered()){
+            throw new InvalidUserInputException(PACKAGE_IS_ALREADY_DELIVERED);
         }
         deliveryRouteToAddTo.addPackageToRoute(packageToAdd);
         return String.format(ASSIGNED_TO_ROUTE, idOfPackage, idOfRoute);

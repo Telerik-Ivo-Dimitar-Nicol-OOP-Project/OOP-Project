@@ -12,6 +12,7 @@ public class PackageImpl implements Package {
     public static final int CONTACT_MAX_LENGHT = 50;
     public static final String CONTACT_ERRROR_MESSAGE = "Contact information" +
             "must be between 10 & 50 characters";
+    public static final String NOT_ASSIGNED_TO_ROUTE = "Not assigned to route";
 
 
     private final int id;
@@ -19,7 +20,9 @@ public class PackageImpl implements Package {
     private Location endLocation;
     private double weight;
     private String contact;
+    private String idOfRouteToWhichPackageIsAssigned;
     private boolean assignedToRoute;
+    private boolean isDelivered;
 
 
 
@@ -30,9 +33,30 @@ public class PackageImpl implements Package {
         setWeight(weight);
         setContact(contact);
         assignedToRoute = false;
-
+        isDelivered = false;
+        idOfRouteToWhichPackageIsAssigned = NOT_ASSIGNED_TO_ROUTE;
 
     }
+
+    @Override
+    public String getRouteIdToWhichPackageIsAssigned() {
+        return idOfRouteToWhichPackageIsAssigned;
+    }
+
+    @Override
+    public void setRouteIdToWhichPackageIsAssigned(int routeId) {
+        this.idOfRouteToWhichPackageIsAssigned = Integer.toString(routeId);
+
+    }
+
+    public boolean isDelivered() {
+        return isDelivered;
+    }
+
+    public void setDelivered() {
+        isDelivered = true;
+    }
+
     public boolean isAssignedToRoute() {
         return assignedToRoute;
     }
@@ -78,6 +102,6 @@ public class PackageImpl implements Package {
     @Override
     public String toString(){
         return String.format("Package with id: %d%n Weight: %.2f%n Start & End Location: %s - %s%n contact information: " +
-                "%s%n", getId(), getWeight(), getStartLocation(), getEndLocation(), getContactInformation());
+                "%s%nAssigned to route with ID: %s%n", getId(), getWeight(), getStartLocation(), getEndLocation(), getContactInformation(), getRouteIdToWhichPackageIsAssigned());
     }
 }

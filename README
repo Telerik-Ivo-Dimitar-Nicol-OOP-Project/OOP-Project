@@ -6,7 +6,7 @@ By Ivo, Dimitar, Nicol
 
 To create a package user Createpackage command, followed with 2 city codes, the weight of the package and then contact information.
 Example:
-Createpackage syd mel 23.4 Ivo Popov +12312412425
+
 
 To list all packages use the listpackages command
 example

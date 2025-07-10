@@ -15,4 +15,8 @@ public class DistanceCalculatorTests {
     public void should_return_correct_distance_SYD_MEL_PER_DAR(){
         Assertions.assertEquals(8411, DistanceCalculator.calculateDistance(Location.SYD, Location.MEL, Location.PER, Location.DAR));
     }
+    @Test
+    public void should_throw_exception_when_single_location(){
+        Assertions.assertThrows(IllegalArgumentException.class, () -> DistanceCalculator.calculateDistance(Location.PER));
+    }
 }

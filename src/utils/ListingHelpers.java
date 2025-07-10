@@ -13,6 +13,9 @@ public class ListingHelpers {
     public static String packagesToString(List<PackageImpl> packages){
         List<String> result = new ArrayList<>();
         for (PackageImpl pack : packages){
+            if (pack.isDelivered()){
+                continue;
+            }
             result.add(pack.toString());
         }
         return String.join(CommandConstants.JOIN_DELIMITER + System.lineSeparator(), result).trim();

@@ -107,15 +107,18 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
     @Override
     public void addPackageToRoute(Package packageToAdd) {
+        packageToAdd.setAssignedToRoute(true);
+        packageToAdd.setRouteIdToWhichPackageIsAssigned(this.getRouteID());
         weightOfAssignedPackages += packageToAdd.getWeight();
         assignedPackages.add(packageToAdd);
-
     }
 
     @Override
     public void removePackageFromRoute(int packageID) {
         for (int i = 0; i < assignedPackages.size(); i++) {
             if (assignedPackages.get(i).getId() == packageID){
+                assignedPackages.get(i).setAssignedToRoute(false);
+                assignedPackages.get(i).setDelivered();
                 weightOfAssignedPackages -= assignedPackages.get(i).getWeight();
                 assignedPackages.remove(i);
                 return;
