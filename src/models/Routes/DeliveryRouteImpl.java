@@ -41,9 +41,14 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return id;
     }
 
-public void addCheckpoint(Location checkpoint) {
-        if (!isValidLocation(String.valueOf(checkpoint))) {
+    public void addCheckpoint(Location checkpoint) {
+        if (!isValidLocation(checkpoint.name())) {
             throw new IllegalArgumentException("Invalid location: " + checkpoint);
+        }
+
+        if (checkpoints.isEmpty()) {
+            checkpoints.add(checkpoint);
+            return;
         }
 
         if (checkpoints.contains(checkpoint)) {
