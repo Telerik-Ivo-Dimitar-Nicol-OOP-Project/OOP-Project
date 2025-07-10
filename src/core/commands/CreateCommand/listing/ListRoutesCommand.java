@@ -10,10 +10,10 @@ import java.util.List;
 
 public class ListRoutesCommand implements Command {
 
-    private final List<DeliveryRouteImpl> routes;
+    private final List<DeliveryRoute> routes;
     public static final String NO_ROUTES_ERROR = "There are no routes created yet.";
 
-    public ListRoutesCommand(List<DeliveryRouteImpl> routes) {
+    public ListRoutesCommand(List<DeliveryRoute> routes) {
         this.routes = routes;
     }
 

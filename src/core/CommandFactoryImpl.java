@@ -35,7 +35,11 @@ public class CommandFactoryImpl implements CommandFactory {
             case LISTFREEVEHICLES:
                 return new ListFreeVehiclesCommand(logisticRepository);
             case LISTROUTES:
-                return new ListRoutesCommand(logisticRepository.getRoutes());
+                return new ListRoutesCommand(
+                        logisticRepository.getRoutes().stream()
+                                .map(r -> (models.contracts.DeliveryRoute) r)
+                                .toList()
+                );
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));
