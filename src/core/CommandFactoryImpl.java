@@ -1,14 +1,11 @@
 package core;
 
-import core.commands.CreateCommand.listing.FindRouteCommand;
-import core.commands.CreateCommand.listing.ListFreeVehiclesCommand;
-import core.commands.CreateCommand.listing.ListTrucksCommand;
+import core.commands.CreateCommand.listing.*;
 import core.commands.creation.AddCheckpointCommand;
 import core.commands.creation.AssignRouteCommand;
 import core.commands.creation.CreateRouteCommand;
 import core.contracts.Command;
 import core.commands.CreateCommand.enums.CommandType;
-import core.commands.CreateCommand.listing.ListPackagesCommand;
 import core.commands.creation.CreatePackageCommand;
 import core.contracts.CommandFactory;
 import core.contracts.LogisticRepository;
@@ -37,7 +34,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListTrucksCommand(logisticRepository);
             case LISTFREEVEHICLES:
                 return new ListFreeVehiclesCommand(logisticRepository);
-
+            case LISTROUTES:
+                return new ListRoutesCommand(logisticRepository.getRoutes());
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));
