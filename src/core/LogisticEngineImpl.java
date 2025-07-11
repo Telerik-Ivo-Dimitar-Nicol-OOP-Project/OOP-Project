@@ -6,6 +6,12 @@ import core.contracts.Engine;
 import core.contracts.LogisticRepository;
 import exceptions.InvalidUserInputException;
 
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,32 +23,48 @@ public class LogisticEngineImpl implements Engine {
 
     private final CommandFactory commandFactory;
     private final LogisticRepository logisticRepository;
+    private PrintWriter writer;
+    private static final DateTimeFormatter DATE_TIME_FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
     public LogisticEngineImpl() {
         this.commandFactory = new CommandFactoryImpl();
         this.logisticRepository = new LogisticRepositoryImpl();
+        try {
+            writer =  new PrintWriter(new FileWriter("Logs.txt", true));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        while (true) {
-            try {
-                String inputLine = scanner.nextLine();
-                if (inputLine.isBlank()) {
-                    System.out.println(EMPTY_COMMAND_ERROR);
-                    continue;
-                }
-                if (inputLine.equalsIgnoreCase(TERMINATION_COMMAND)) {
-                    break;
-                }
-                processCommand(inputLine);
-            } catch (InvalidUserInputException | IllegalArgumentException ex) {
-                if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
-                    System.out.println(ex.getMessage());
-                } else {
-                    System.out.println(ex.toString());
+        try {
+            while (true) {
+                try {
+                    String inputLine = scanner.nextLine();
+                    if (inputLine.isBlank()) {
+                        System.out.println(EMPTY_COMMAND_ERROR);
+                        continue;
+                    }
+                    if (inputLine.equalsIgnoreCase(TERMINATION_COMMAND)) {
+                        writer.close();
+                        break;
+                    }
+                    processCommand(inputLine);
+                } catch (InvalidUserInputException | IllegalArgumentException ex) {
+                    String timestamp = LocalDateTime.now().format(DATE_TIME_FORMATTER);
+                    if (ex.getMessage() != null && !ex.getMessage().isEmpty()) {
+                        System.out.println(ex.getMessage());
+                        writer.printf("%s %s%n", timestamp, ex.getMessage());
+                        writer.flush();
+                    } else {
+                        System.out.println(ex.toString());
+                    }
                 }
             }
+        } finally {
+            writer.close();
         }
     }
 
@@ -51,6 +73,9 @@ public class LogisticEngineImpl implements Engine {
         Command command = commandFactory.createCommandFromCommandName(commandName, logisticRepository);
         List<String> parameters = extractCommandParameters(inputLine);
         String executionResult = command.execute(parameters);
+        String timestamp = LocalDateTime.now().format(DATE_TIME_FORMATTER);
+        this.writer.printf("%s %s%n", timestamp, executionResult);
+        this.writer.flush();
         System.out.println(executionResult);
     }
 
