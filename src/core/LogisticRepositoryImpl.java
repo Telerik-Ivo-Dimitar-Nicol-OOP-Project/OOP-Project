@@ -87,4 +87,12 @@ public class LogisticRepositoryImpl implements LogisticRepository {
     public List<Vehicle> getAllVehicles() {
         return new ArrayList<>(vehicles);
     }
+
+    @Override
+    public Vehicle getVehicleById(int id) {
+        return vehicles.stream()
+                .filter(v -> v.getId() == id)
+                .findFirst()
+                .orElseThrow(() -> new InvalidUserInputException("Truck not found: " + id));
+    }
 }

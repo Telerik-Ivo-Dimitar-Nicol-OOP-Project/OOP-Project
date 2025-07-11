@@ -1,12 +1,9 @@
 package core;
 
 import core.commands.CreateCommand.listing.*;
-import core.commands.creation.AddCheckpointCommand;
-import core.commands.creation.AssignRouteCommand;
-import core.commands.creation.CreateRouteCommand;
+import core.commands.creation.*;
 import core.contracts.Command;
 import core.commands.CreateCommand.enums.CommandType;
-import core.commands.creation.CreatePackageCommand;
 import core.contracts.CommandFactory;
 import core.contracts.LogisticRepository;
 import utils.ParsingHelpers;
@@ -34,6 +31,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListTrucksCommand(logisticRepository);
             case LISTFREEVEHICLES:
                 return new ListFreeVehiclesCommand(logisticRepository);
+            case ASSIGNTRUCK:
+                return new AssignTruckCommand(logisticRepository);
             case LISTROUTES:
                 return new ListRoutesCommand(
                         logisticRepository.getRoutes().stream()

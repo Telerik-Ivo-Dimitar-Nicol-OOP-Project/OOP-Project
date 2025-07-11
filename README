@@ -22,3 +22,12 @@ findroute 1
 Assign route command assigns an package to route, it first takes package id and then route id
 Example:
 assignroute packageid routeid
+
+command assigntruck:
+createpackage SYD MEL 50 Ivan_Ivanov
+createroute <StartLocation> <EndLocation> //createroute Sydney Melbourne
+listfreevehicles
+assigntruck <RouteID> <TruckID>
+
+
+

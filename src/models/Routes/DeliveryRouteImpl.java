@@ -3,6 +3,7 @@ package models.Routes;
 import models.Location;
 import models.contracts.DeliveryRoute;
 import models.contracts.Package;
+import models.contracts.Vehicle;
 import utils.DistanceCalculator;
 
 import java.time.LocalDateTime;
@@ -21,6 +22,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private final List<Package> assignedPackages;
     private double weightOfAssignedPackages;
     private static final AtomicInteger idCounter = new AtomicInteger(1);
+    private Vehicle assignedVehicle;
+
 
 
     public DeliveryRouteImpl(Location startLocation, Location endLocation){
@@ -126,6 +129,17 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
         }
         throw new IllegalArgumentException(String.format("No package with id: %d is assigned to route %s", packageID, getRouteID()));
+    }
+
+    @Override
+    public Vehicle getAssignedVehicle() {
+        return assignedVehicle;
+    }
+
+    @Override
+    public void assignVehicle(Vehicle vehicle) {
+        this.assignedVehicle = vehicle;
+        vehicle.setFree(false);
     }
 
     @Override

@@ -7,6 +7,6 @@ public interface Vehicle extends Identifiable{
     int getCapacity();
     int getRange();
     boolean isFree();
-
+    void setFree(boolean isFree);
 
 }
