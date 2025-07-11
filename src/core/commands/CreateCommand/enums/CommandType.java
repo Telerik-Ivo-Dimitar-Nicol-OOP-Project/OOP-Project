@@ -11,5 +11,6 @@ public enum CommandType {
     ASSIGNROUTE,
     ADDCHECKPOINT,
     ASSIGNTRUCK,
+    SAVESTATE,
 
 }

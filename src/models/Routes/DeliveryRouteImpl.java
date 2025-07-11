@@ -91,7 +91,7 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
     @Override
     public LocalDateTime getArrivalTime() {
-        return departureTime;
+        return arrivalTime;
     }
 
     @Override
@@ -141,6 +141,24 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         this.assignedVehicle = vehicle;
         vehicle.setFree(false);
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public List<Location> getCheckpoints() {
+        return new ArrayList<>(checkpoints);
+    }
+
+    public List<Package> getAssignedPackages() {
+        return new ArrayList<>(assignedPackages);
+    }
+
+    public double getWeightOfAssignedPackages() {
+        return weightOfAssignedPackages;
+    }
+
+
 
     @Override
     public String toString(){

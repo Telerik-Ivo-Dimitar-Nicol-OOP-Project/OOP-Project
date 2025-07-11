@@ -104,4 +104,14 @@ public class PackageImpl implements Package {
         return String.format("Package with id: %d%n Weight: %.2f%n Start & End Location: %s - %s%n contact information: " +
                 "%s%nAssigned to route with ID: %s%n", getId(), getWeight(), getStartLocation(), getEndLocation(), getContactInformation(), getRouteIdToWhichPackageIsAssigned());
     }
+
+    public String getIdOfRouteToWhichPackageIsAssigned() {
+        return idOfRouteToWhichPackageIsAssigned;
+    }
+
+
+    public String getContact() {
+        return contact;
+    }
+
 }

@@ -3,11 +3,11 @@ package models.vehicles;
 import models.VehicleName;
 
 public abstract class Vehicle implements models.contracts.Vehicle {
-    protected final int id;
-    protected int range;
-    protected int capacity;
-    protected final VehicleName name;
-    protected boolean isFree = true;
+    private final int id;
+    private int range;
+    private int capacity;
+    private final VehicleName name;
+    private boolean isFree = true;
 
     public Vehicle(int id, VehicleName vehicleName){
         this.id = id;

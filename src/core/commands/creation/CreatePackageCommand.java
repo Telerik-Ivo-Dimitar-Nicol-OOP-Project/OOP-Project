@@ -2,6 +2,7 @@ package core.commands.creation;
 
 import core.contracts.Command;
 import core.contracts.LogisticRepository;
+import exceptions.InvalidUserInputException;
 import models.Location;
 import models.contracts.Package;
 import utils.ParsingHelpers;
@@ -26,6 +27,9 @@ public class CreatePackageCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
+        if (parameters.size() < EXPECTED_NUMBER_OF_ARGUMENTS){
+            throw new InvalidUserInputException("Create Package needs 2 city codes, weight and contact info");
+        }
         // ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         parseParameters(parameters);
         Package newPackage = repository.createPackage(startLocation, endLocation, weight, contact);

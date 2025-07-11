@@ -11,3 +11,4 @@
 
 # File-based project format
 **/*.iws
+*.txt

@@ -1,6 +1,7 @@
 package core;
 
 import core.commands.CreateCommand.listing.*;
+import core.commands.SaveAndRestoreCommands.SaveStateCommand;
 import core.commands.creation.*;
 import core.contracts.Command;
 import core.commands.CreateCommand.enums.CommandType;
@@ -33,6 +34,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListFreeVehiclesCommand(logisticRepository);
             case ASSIGNTRUCK:
                 return new AssignTruckCommand(logisticRepository);
+            case SAVESTATE:
+                return new SaveStateCommand(logisticRepository);
             case LISTROUTES:
                 return new ListRoutesCommand(
                         logisticRepository.getRoutes().stream()

@@ -29,5 +29,7 @@ createroute <StartLocation> <EndLocation> //createroute Sydney Melbourne
 listfreevehicles
 assigntruck <RouteID> <TruckID>
 
+command Savestate -  Saves the current list of packages, routes and trucks to a text file.
+
 
 
