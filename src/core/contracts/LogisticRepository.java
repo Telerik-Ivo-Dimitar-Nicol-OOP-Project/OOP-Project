@@ -19,4 +19,5 @@ public interface LogisticRepository {
     List<DeliveryRouteImpl> getRoutes();
     List<Vehicle> getAllVehicles();
     DeliveryRoute getRouteById(int id);
+    Vehicle getVehicleById(int id);
 }

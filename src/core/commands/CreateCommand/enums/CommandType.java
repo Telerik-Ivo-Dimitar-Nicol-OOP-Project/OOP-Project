@@ -10,5 +10,6 @@ public enum CommandType {
     FINDROUTE,
     ASSIGNROUTE,
     ADDCHECKPOINT,
+    ASSIGNTRUCK,
 
 }

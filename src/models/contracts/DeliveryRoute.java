@@ -15,5 +15,6 @@ public interface DeliveryRoute extends Printable {
     public int getTotalDistance();
     void addPackageToRoute(Package packageToAdd);
     void removePackageFromRoute(int packageID);
-
+    Vehicle getAssignedVehicle();
+    void assignVehicle(Vehicle vehicle);
 }

@@ -4,6 +4,8 @@ import models.VehicleName;
 
 public class Scania extends Vehicle implements models.contracts.Vehicle {
 
+    private boolean isFree = true;
+
     public Scania(int id){
         super(id, VehicleName.SCANIA);
 
@@ -17,6 +19,16 @@ public class Scania extends Vehicle implements models.contracts.Vehicle {
     @Override
     protected int setCapacity() {
         return 42000;
+    }
+
+    @Override
+    public boolean isFree() {
+        return isFree;
+    }
+
+    @Override
+    public void setFree(boolean isFree) {
+        this.isFree = isFree;
     }
 
 
