@@ -1,7 +1,7 @@
 package models.contracts;
 
 import models.Location;
-
+import models.Routes.Checkpoint;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,4 +17,12 @@ public interface DeliveryRoute extends Printable {
     void removePackageFromRoute(int packageID);
     Vehicle getAssignedVehicle();
     void assignVehicle(Vehicle vehicle);
+
+
+
+
+
+    void calculateCheckpointsWithArrivalTimes(double averageSpeedKmh);
+    List<Checkpoint> getCalculatedCheckpoints();
+    boolean isSuitableForPackage(Package packageToAssign);
 }
