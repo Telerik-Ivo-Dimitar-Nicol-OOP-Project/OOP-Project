@@ -23,11 +23,30 @@ Assign route command assigns an package to route, it first takes package id and 
 Example:
 assignroute packageid routeid
 
-command assigntruck:
-createpackage SYD MEL 50 Ivan_Ivanov
-createroute <StartLocation> <EndLocation> //createroute Sydney Melbourne
-listfreevehicles
-assigntruck <RouteID> <TruckID>
+#### ListTrucksCommand
+The `ListTrucksCommand` is used to display a list of **all registered trucks** in the system,
+including both assigned and free ones.
+Each truck's ID, type, capacity, range, and availability status are shown.
+
+#### ListFreeVehiclesCommand
+The `ListFreeVehiclesCommand` is used to display only the trucks that are **currently available (not assigned)**
+to any route.
+This command helps employees find trucks ready to be assigned.
+
+#### AssignTruckCommand
+The 'AssignTruckCommand' is used to assign a free truck to an existing delivery route.
+Each route can only have one truck assigned, and each truck can only be assigned to one route at a time.
+Attempting to assign a truck that is already taken, or assigning a second truck to a route, will result in an error.
+Steps to Execute `assigntruck`
+1. Create a route - createroute <StartLocation> <EndLocation> //createroute Sydney Melbourne
+2. View available (free) trucks - listfreevehicles
+3. Choose the ID of a free truck (e.g., `1001`)
+3. Execute the `assigntruck` command - assigntruck <RouteID> <TruckID> //assigntruck 1 1001
+Possible Errors:
+`Route not found` – if the route ID is invalid
+`Truck not found` – if the truck ID does not exist
+`Truck is already assigned` – if the truck is already in use
+`Route already has a truck` – if the route already has a truck assigned
 
 command Savestate -  Saves the current list of packages, routes and trucks to a text file.
 
