@@ -17,11 +17,9 @@ public interface DeliveryRoute extends Printable {
     void removePackageFromRoute(int packageID);
     Vehicle getAssignedVehicle();
     void assignVehicle(Vehicle vehicle);
-
-
-
-
-
+    double getWeightOfAssignedPackages();
+    List<Package> getAssignedPackages();
+    List<Location> getCheckpoints();
     void calculateCheckpointsWithArrivalTimes(double averageSpeedKmh);
     List<Checkpoint> getCalculatedCheckpoints();
     boolean isSuitableForPackage(Package packageToAssign);
