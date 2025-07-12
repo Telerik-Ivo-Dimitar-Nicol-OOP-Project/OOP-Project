@@ -51,5 +51,26 @@ Possible Errors:
 
 command Savestate -  Saves the current list of packages, routes and trucks to a text file.
 
+#### Created Checkpoint Class
+Represents a stop along a delivery route
+Contains the following information:
+- Location of the stop
+- distanceFromPrevious stop in kilometers
+- arrivalTime (calculated based on speed and distance)
+
+#### Created calculateCheckpointsWithArrivalTimes(double speed) method
+
+#### Created ShowCheckpointsCommand
+Accepts a routeId as input
+Displays all route stops (checkpoints) along with their estimated arrival times
+
+#### Created the BulkAssignPackagesCommand
+Accepts a routeId and multiple packageIds
+BulkAssign <routeId> <packageId1> <packageId2> <packageId3> //Package 1 assigned successfully.
+                                                            //Package 2 assigned successfully.
+                                                            //Package 3 assigned successfully.
+
+                                                            
+
 
 
