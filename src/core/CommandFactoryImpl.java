@@ -36,6 +36,10 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new AssignTruckCommand(logisticRepository);
             case SAVESTATE:
                 return new SaveStateCommand(logisticRepository);
+            case SHOWCHECKPOINTS:
+                return new ShowCheckpointsCommand(logisticRepository);
+            case BULKASSIGN:
+                return new BulkAssignPackagesCommand(logisticRepository);
             case LISTROUTES:
                 return new ListRoutesCommand(
                         logisticRepository.getRoutes().stream()

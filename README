@@ -4,6 +4,7 @@ Project Description
 By Ivo, Dimitar, Nicol
 
 
+
 To create a package user Createpackage command, followed with 2 city codes, the weight of the package and then contact information.
 Example:
 createpackage syd mel 24 Ivo Popov 0989898898

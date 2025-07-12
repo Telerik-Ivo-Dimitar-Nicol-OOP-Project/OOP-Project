@@ -12,5 +12,7 @@ public enum CommandType {
     ADDCHECKPOINT,
     ASSIGNTRUCK,
     SAVESTATE,
+    SHOWCHECKPOINTS,
+    BULKASSIGN,
 
 }

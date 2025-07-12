@@ -29,6 +29,8 @@ public class CreateRouteCommand implements Command {
         // ValidationHelpers.validateArgumentsCount(parameters, EXPECTED_NUMBER_OF_ARGUMENTS);
         parseParameters(parameters);
         DeliveryRoute newRoute = repository.createRoute(startLocation, endLocation);
+        newRoute.calculateCheckpointsWithArrivalTimes(87);
+
         return String.format(ROUTE_CREATED_MESSAGE, newRoute.getRouteID());
 
 

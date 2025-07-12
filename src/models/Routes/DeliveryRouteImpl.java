@@ -23,6 +23,7 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private double weightOfAssignedPackages;
     private static final AtomicInteger idCounter = new AtomicInteger(1);
     private Vehicle assignedVehicle;
+    private List<Checkpoint> calculatedCheckpoints = new ArrayList<>();
 
 
 
@@ -35,8 +36,8 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         this.arrivalTime = departureTime.plusDays(2);
         assignedPackages = new ArrayList<>();
         weightOfAssignedPackages = 0;
+        calculateCheckpointsWithArrivalTimes(87);
     }
-
 
     @Override
     public int getRouteID() {
@@ -158,7 +159,42 @@ public class DeliveryRouteImpl implements DeliveryRoute {
         return weightOfAssignedPackages;
     }
 
+    public List<Checkpoint> getCalculatedCheckpoints() {
+        return calculatedCheckpoints;
+    }
 
+    public void calculateCheckpointsWithArrivalTimes(double averageSpeedKmh) {
+        if (checkpoints.size() < 2) {
+            throw new IllegalStateException("At least two checkpoints required to calculate route.");
+        }
+
+        calculatedCheckpoints.clear();
+        LocalDateTime currentTime = departureTime;
+        Location previous = checkpoints.get(0);
+        calculatedCheckpoints.add(new Checkpoint(previous, 0, currentTime));
+
+        for (int i = 1; i < checkpoints.size(); i++) {
+            Location current = checkpoints.get(i);
+            int distance = utils.DistanceCalculator.calculateDistance(previous, current);
+            long travelTimeMinutes = (long) ((distance / averageSpeedKmh) * 60);
+            currentTime = currentTime.plusMinutes(travelTimeMinutes);
+
+            calculatedCheckpoints.add(new Checkpoint(current, distance, currentTime));
+            previous = current;
+        }
+    }
+
+    @Override
+    public boolean isSuitableForPackage(Package packageToAssign) {
+        if (assignedVehicle == null) {
+            return false;
+        }
+
+        boolean fitsWeight = weightOfAssignedPackages + packageToAssign.getWeight() <= assignedVehicle.getCapacity();
+        boolean endsAtSameLocation = checkpoints.get(checkpoints.size() - 1) == packageToAssign.getEndLocation();
+
+        return fitsWeight && endsAtSameLocation;
+    }
 
     @Override
     public String toString(){
