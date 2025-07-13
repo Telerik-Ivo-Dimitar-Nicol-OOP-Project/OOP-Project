@@ -14,5 +14,6 @@ public enum CommandType {
     SAVESTATE,
     SHOWCHECKPOINTS,
     BULKASSIGN,
+    VIEWPACKAGEBYID,
 
 }
