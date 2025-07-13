@@ -18,6 +18,7 @@ public class CreateRouteCommand implements Command {
     private static final String LOCATION_ERROR_MESSAGE = "Input Location is not a valid location";
     private static final String DATE_TIME_FORMATTER = "yyyy-MM-dd_HH:mm";
     private static final String INVALID_DATE_FORMAT_MESSAGE = "Invalid date format. Use 'yyyy-MM-dd_HH:mm' format.";
+    private static final String INVALID_DEPARTURE_TIME_MESSAGE = "Departure time cannot be in the past.";
 
 
     private final LogisticRepository repository;
@@ -42,6 +43,10 @@ public class CreateRouteCommand implements Command {
         startLocation = ParsingHelpers.tryParseEnum(parameters.get(0), Location.class, LOCATION_ERROR_MESSAGE );
         endLocation = ParsingHelpers.tryParseEnum(parameters.get(1), Location.class, LOCATION_ERROR_MESSAGE );
         departureTime = ParsingHelpers.tryParseDateTime(parameters.get(2), DATE_TIME_FORMATTER, INVALID_DATE_FORMAT_MESSAGE);
+
+        if (departureTime.isBefore(LocalDateTime.now())){
+            throw new IllegalArgumentException(INVALID_DEPARTURE_TIME_MESSAGE);
+        }
 
 
     }
