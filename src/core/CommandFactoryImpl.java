@@ -41,6 +41,8 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ShowCheckpointsCommand(logisticRepository);
             case BULKASSIGN:
                 return new BulkAssignPackagesCommand(logisticRepository);
+            case VIEWPACKAGEBYID:
+                return new ViewPackageByIdCommand(logisticRepository);
             case LISTROUTES:
                 return new ListRoutesCommand(
                         logisticRepository.getRoutes().stream()
