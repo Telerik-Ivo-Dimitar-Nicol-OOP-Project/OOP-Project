@@ -14,15 +14,23 @@ example
 listpackages
 
 Create route command:
-createroute SYD MEL
+Creates route with start and end locations and a departure time
+departure time needs to be datetime format yyyy-MM-dd_HH:mm
+createroute SYD MEL 2025-07-20_15:30
 
 Find suitable route command - takes in a package id and prints routes that contain its start & end location
 Example:
 findroute 1
 
-Assign route command assigns an package to route, it first takes package id and then route id
+Assign route command:
+assigns an package to route, it first takes package id and then route id
 Example:
 assignroute packageid routeid
+
+AddCheckpoint command:
+adds an additional stop to a specified route with route id
+Example:
+addcheckpoint 1 adl
 
 #### ListTrucksCommand
 The `ListTrucksCommand` is used to display a list of **all registered trucks** in the system,
