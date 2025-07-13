@@ -24,7 +24,7 @@ public class DeliveryRouteImpl implements DeliveryRoute {
     private double weightOfAssignedPackages;
     private static final AtomicInteger idCounter = new AtomicInteger(1);
     private Vehicle assignedVehicle;
-    private List<Checkpoint> calculatedCheckpoints = new ArrayList<>();
+    private final List<Checkpoint> calculatedCheckpoints = new ArrayList<>();
 
 
 

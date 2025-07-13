@@ -4,6 +4,9 @@ import models.contracts.Package;
 import utils.ParsingHelpers;
 import utils.ValidationHelpers;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public class PackageImpl implements Package {
     public static final double PACKAGE_MIN_WEIGHT = 0.1;
     public static final double PACKAGE_MAX_WEIGHT = 5000;
@@ -13,6 +16,7 @@ public class PackageImpl implements Package {
     public static final String CONTACT_ERRROR_MESSAGE = "Contact information" +
             "must be between 10 & 50 characters";
     public static final String NOT_ASSIGNED_TO_ROUTE = "Not assigned to route";
+    private LocalDateTime estimatedDeliveryDate;
 
 
     private final int id;
@@ -112,6 +116,14 @@ public class PackageImpl implements Package {
 
     public String getContact() {
         return contact;
+    }
+
+    public LocalDateTime getEta() {
+        return estimatedDeliveryDate;
+    }
+
+    public void setEta(LocalDateTime eta) {
+        this.estimatedDeliveryDate = eta;
     }
 
 }
