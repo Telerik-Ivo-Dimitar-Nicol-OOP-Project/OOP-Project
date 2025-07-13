@@ -33,6 +33,7 @@ public class CompleteRouteCommand implements Command {
 
         for (Package pkg : route.getAssignedPackages()) {
             pkg.setDelivered();
+            System.out.println("Package with ID " + pkg.getId() + " has been marked as delivered.");
             // Optionally, set arrival time if your Package model supports it
             // pkg.setArrivalTime(route.getArrivalTime());
         }

@@ -1,5 +1,6 @@
 package core;
 
+import core.commands.CreateCommand.CompleteRouteCommand;
 import core.commands.CreateCommand.listing.*;
 import core.commands.SaveAndRestoreCommands.SaveStateCommand;
 import core.commands.creation.*;
@@ -47,6 +48,8 @@ public class CommandFactoryImpl implements CommandFactory {
                                 .filter(r -> !models.Routes.DeliveryRouteImpl.getStatusFlag())
                                 .toList()
                 );
+            case COMPLETEROUTE:
+                return new CompleteRouteCommand(logisticRepository);
 
             default:
                 throw new IllegalArgumentException(String.format(INVALID_COMMAND, commandName));

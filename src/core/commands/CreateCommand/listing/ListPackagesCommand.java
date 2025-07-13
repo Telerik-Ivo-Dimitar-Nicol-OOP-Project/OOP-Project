@@ -18,7 +18,10 @@ public class ListPackagesCommand implements Command {
     }
     @Override
     public String execute(List<String> parameters) {
-        List<PackageImpl> packages = repository.getPackages();
+
+        List<PackageImpl> packages = repository.getPackages().stream()
+                .filter(pkg -> !pkg.isDelivered())
+                .toList();
         if (packages.isEmpty()) {
             throw new InvalidUserInputException(NO_PACKAGES_ERROR);
         }
