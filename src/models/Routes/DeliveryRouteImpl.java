@@ -59,9 +59,6 @@ public class DeliveryRouteImpl implements DeliveryRoute {
             return;
         }
 
-        Location start = checkpoints.get(0);
-        Location end = checkpoints.get(checkpoints.size() - 1);
-
         int bestDistance = Integer.MAX_VALUE;
         int bestInsertIndex = 1;
 
