@@ -44,6 +44,7 @@ public class CommandFactoryImpl implements CommandFactory {
                 return new ListRoutesCommand(
                         logisticRepository.getRoutes().stream()
                                 .map(r -> (models.contracts.DeliveryRoute) r)
+                                .filter(r -> !models.Routes.DeliveryRouteImpl.getStatusFlag())
                                 .toList()
                 );
 

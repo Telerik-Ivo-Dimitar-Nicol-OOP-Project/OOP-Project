@@ -2,6 +2,8 @@ package utils;
 
 import exceptions.InvalidUserInputException;
 
+import java.time.LocalDateTime;
+
 public class ParsingHelpers {
     private static final String INVALID_NUMBER_FIELD_MESSAGE = "Invalid value for %s. Should be a number.";
     private static final String INVALID_BOOLEAN_FIELD_MESSAGE = "Invalid value for %s. Should be one of 'true' or 'false'.";
@@ -36,6 +38,15 @@ public class ParsingHelpers {
             return Enum.valueOf(type, valueToParse.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(String.format(errorMessage, valueToParse));
+        }
+    }
+
+    public static LocalDateTime tryParseDateTime(String valueToParse, String pattern, String errorMessage) {
+        try {
+            java.time.format.DateTimeFormatter formatter = java.time.format.DateTimeFormatter.ofPattern(pattern);
+            return LocalDateTime.parse(valueToParse, formatter);
+        } catch (Exception e) {
+            throw new InvalidUserInputException(errorMessage);
         }
     }
 }

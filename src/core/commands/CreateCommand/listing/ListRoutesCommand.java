@@ -20,10 +20,14 @@ public class ListRoutesCommand implements Command {
 
     @Override
     public String execute(List<String> parameters) {
-        if (routes.isEmpty()) {
+        List<DeliveryRoute> activeRoutes = routes.stream()
+                .filter(r -> !models.Routes.DeliveryRouteImpl.getStatusFlag())
+                .toList();
+
+        if (activeRoutes.isEmpty()) {
             throw new InvalidUserInputException(NO_ROUTES_ERROR);
         }
 
-        return ListingHelpers.routesToString(routes);
+        return ListingHelpers.routesToString(activeRoutes);
     }
 }

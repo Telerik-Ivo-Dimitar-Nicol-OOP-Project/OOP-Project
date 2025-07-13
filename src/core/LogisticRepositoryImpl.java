@@ -9,6 +9,7 @@ import models.contracts.DeliveryRoute;
 import models.contracts.Package;
 import models.contracts.Vehicle;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,8 +65,8 @@ public class LogisticRepositoryImpl implements LogisticRepository {
 
     // to do
     @Override
-    public DeliveryRoute createRoute(Location startLocation, Location endLocation) {
-        DeliveryRouteImpl route = new DeliveryRouteImpl(startLocation, endLocation);
+    public DeliveryRoute createRoute(Location startLocation, Location endLocation, LocalDateTime departureTime) {
+        DeliveryRouteImpl route = new DeliveryRouteImpl(startLocation, endLocation, departureTime);
         this.routes.add(route);
         return route;
     }

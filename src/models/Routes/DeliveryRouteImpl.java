@@ -16,10 +16,11 @@ import static utils.ValidationHelpers.isValidLocation;
 public class DeliveryRouteImpl implements DeliveryRoute {
 
     private final int id;
-    private  final List<Location> checkpoints;
+    private final List<Location> checkpoints;
     private final LocalDateTime departureTime;
     private final LocalDateTime arrivalTime;
     private final List<Package> assignedPackages;
+    private static boolean completedFlag = false ;
     private double weightOfAssignedPackages;
     private static final AtomicInteger idCounter = new AtomicInteger(1);
     private Vehicle assignedVehicle;
@@ -27,12 +28,12 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
 
 
-    public DeliveryRouteImpl(Location startLocation, Location endLocation){
+    public DeliveryRouteImpl(Location startLocation, Location endLocation, LocalDateTime departureTime) {
         this.id = idCounter.getAndIncrement();
         this.checkpoints = new ArrayList<>();
         addCheckpoint(startLocation);
         addCheckpoint(endLocation);
-        this.departureTime = LocalDateTime.now().plusDays(2);//TODO placeholder departure time. Could be made with some actual logic.
+        this.departureTime = departureTime;
         this.arrivalTime = departureTime.plusDays(2);
         assignedPackages = new ArrayList<>();
         weightOfAssignedPackages = 0;
@@ -161,6 +162,17 @@ public class DeliveryRouteImpl implements DeliveryRoute {
 
     public List<Checkpoint> getCalculatedCheckpoints() {
         return calculatedCheckpoints;
+    }
+
+    public static boolean getStatusFlag() {
+        return completedFlag;
+    }
+
+    public static void changeRouteStatus() {
+        if (completedFlag) {
+            throw new IllegalStateException("Route is already completed.");
+        }
+        completedFlag = true;
     }
 
     public void calculateCheckpointsWithArrivalTimes(double averageSpeedKmh) {
