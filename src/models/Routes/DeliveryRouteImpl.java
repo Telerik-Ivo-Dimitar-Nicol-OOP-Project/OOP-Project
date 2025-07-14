@@ -199,10 +199,13 @@ public class DeliveryRouteImpl implements DeliveryRoute {
             return false;
         }
 
-        boolean fitsWeight = weightOfAssignedPackages + packageToAssign.getWeight() <= assignedVehicle.getCapacity();
-        boolean endsAtSameLocation = checkpoints.get(checkpoints.size() - 1) == packageToAssign.getEndLocation();
+        int startIndex = checkpoints.indexOf(packageToAssign.getStartLocation());
+        int endIndex = checkpoints.indexOf(packageToAssign.getEndLocation());
 
-        return fitsWeight && endsAtSameLocation;
+        boolean validRoute = startIndex >= 0 && endIndex >= 0 && endIndex > startIndex;
+        boolean fitsWeight = weightOfAssignedPackages + packageToAssign.getWeight() <= assignedVehicle.getCapacity();
+
+        return validRoute && fitsWeight;
     }
 
     @Override

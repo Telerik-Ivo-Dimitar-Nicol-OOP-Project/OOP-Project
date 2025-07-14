@@ -36,6 +36,7 @@ public class AddCheckpointCommand implements Command {
 
         if (route instanceof models.Routes.DeliveryRouteImpl deliveryRoute) {
             deliveryRoute.addCheckpoint(checkpoint);
+            deliveryRoute.calculateCheckpointsWithArrivalTimes(87);
             return String.format("Checkpoint %s added to route %s.", checkpoint, route.getRouteID());
         }
 
